@@ -1,12 +1,10 @@
-# Golang Admin Client API Reference [![Slack](https://slack.min.io/slack?type=svg)](https://slack.min.io)
+# madmin-go — libreFS Admin Go SDK
 
-The MinIO Admin Golang Client SDK provides APIs to manage MinIO services.
+Go client library for administering [libreFS](https://github.com/libreFS/libreFS) servers. Forked from `minio/madmin-go`.
 
 This document assumes that you have a working [Golang setup](https://golang.org/doc/install).
 
-## Initialize MinIO Admin Client object.
-
-## MinIO
+## Initialize Admin Client
 
 ```go
 
@@ -22,8 +20,8 @@ func main() {
     // Use a secure connection.
     ssl := true
 
-    // Initialize minio client object.
-    mdmClnt, err := madmin.New("your-minio.example.com:9000", "YOUR-ACCESSKEYID", "YOUR-SECRETKEY", ssl)
+    // Initialize admin client object.
+    mdmClnt, err := madmin.New("your-librefs.example.com:9000", "YOUR-ACCESSKEYID", "YOUR-SECRETKEY", ssl)
     if err != nil {
         fmt.Println(err)
         return
@@ -41,8 +39,8 @@ func main() {
 
 ## Documentation
 
-All documentation is available [here](https://pkg.go.dev/github.com/minio/madmin-go/v4)
+All documentation is available on [pkg.go.dev](https://pkg.go.dev/github.com/minio/madmin-go/v4).
 
 ## License
 
-This SDK is licensed under [GNU AGPLv3](https://github.com/minio/madmin-go/blob/master/LICENSE).
+Licensed under the GNU AGPLv3 — see the [LICENSE](LICENSE) file.
