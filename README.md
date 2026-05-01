@@ -13,7 +13,7 @@ package main
 import (
     "fmt"
 
-    "github.com/minio/madmin-go/v4"
+    "github.com/libreFS/madmin-go/v4"
 )
 
 func main() {
@@ -39,7 +39,7 @@ func main() {
 
 ## Documentation
 
-All documentation is available on [pkg.go.dev](https://pkg.go.dev/github.com/minio/madmin-go/v4).
+All documentation is available on [pkg.go.dev](https://pkg.go.dev/github.com/libreFS/madmin-go/v4).
 
 ## License
 

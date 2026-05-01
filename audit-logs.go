@@ -28,7 +28,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/minio/madmin-go/v4/log"
+	"github.com/libreFS/madmin-go/v4/log"
 	"github.com/tinylib/msgp/msgp"
 )
 

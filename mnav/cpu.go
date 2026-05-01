@@ -22,7 +22,7 @@ import (
 	"sort"
 
 	"github.com/dustin/go-humanize"
-	"github.com/minio/madmin-go/v4"
+	"github.com/libreFS/madmin-go/v4"
 )
 
 // formatFrequency formats frequency values

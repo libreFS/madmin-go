@@ -22,7 +22,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/minio/madmin-go/v4"
+	"github.com/libreFS/madmin-go/v4"
 )
 
 type NetMetricsNavigator struct {

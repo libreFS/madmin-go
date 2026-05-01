@@ -21,7 +21,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/madmin-go/v4"
+	"github.com/libreFS/madmin-go/v4"
 )
 
 //msgp:tag json

@@ -27,7 +27,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/minio/madmin-go/v4/estream"
+	"github.com/libreFS/madmin-go/v4/estream"
 )
 
 //msgp:replace TraceType with:uint64

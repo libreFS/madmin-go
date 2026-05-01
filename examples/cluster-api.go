@@ -27,8 +27,8 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/minio/madmin-go/v4"
-	"github.com/minio/minio-go/v7/pkg/credentials"
+	"github.com/libreFS/madmin-go/v4"
+	"github.com/libreFS/librefs-go/v7/pkg/credentials"
 )
 
 func main() {

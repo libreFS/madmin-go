@@ -30,7 +30,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/minio/minio-go/v7/pkg/replication"
+	"github.com/libreFS/librefs-go/v7/pkg/replication"
 )
 
 // SiteReplAPIVersion holds the supported version of the server Replication API

@@ -30,8 +30,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/minio/minio-go/v7/pkg/set"
-	xnet "github.com/minio/pkg/v3/net"
+	"github.com/libreFS/librefs-go/v7/pkg/set"
+	xnet "github.com/libreFS/pkg/v3/net"
 )
 
 // AddOrUpdateIDPConfig - creates a new or updates an existing IDP

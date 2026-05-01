@@ -24,8 +24,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/minio/madmin-go/v4/xtime"
-	miniogo "github.com/minio/minio-go/v7"
+	miniogo "github.com/libreFS/librefs-go/v7"
+	"github.com/libreFS/madmin-go/v4/xtime"
 )
 
 // BatchJobRequest to start batch job
