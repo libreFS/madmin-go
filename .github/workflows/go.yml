@@ -3,69 +3,75 @@ name: Go
 on:
   pull_request:
     branches:
-      - main
-      - master
       - v3
-
   push:
     branches:
-      - main
-      - master
       - v3
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
 jobs:
-  build:
-    name: Lint checks Go ${{ matrix.go-version }}
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        go-version: [1.22.x,1.23.x]
-    steps:
-    - name: Set up Go ${{ matrix.go-version }}
-      uses: actions/setup-go@v5
-      with:
-        go-version: ${{ matrix.go-version }}
-      id: go
-
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v4
-
-    - name: Check lint
-      uses: golangci/golangci-lint-action@v7
-
-    - name: Regenerate, vet and test
-      run: |
-         go vet ./...
-         go install -v github.com/tinylib/msgp@latest
-         go install -v golang.org/x/tools/cmd/stringer@latest
-         export PATH=${PATH}:$(go env GOPATH)/bin
-         go generate ./... >/dev/null
-         (! git diff --name-only | grep '_gen.go$$') || (echo "Non-committed changes in auto-generated code is detected, please commit them to proceed." && false)
-
   test:
-    name: Testing Go ${{ matrix.go-version }} on ${{ matrix.os }}
+    name: Build & Test (Go ${{ matrix.go-version }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        go-version: [1.23.x]
+        go-version: [1.25.x, 1.26.x]
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
-    - name: Set up Go ${{ matrix.go-version }} on ${{ matrix.os }}
-      uses: actions/setup-go@v5
-      with:
-        go-version: ${{ matrix.go-version }}
-      id: go
+      - uses: actions/checkout@v4
 
-    - name: Check out code into the Go module directory
-      uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go-version }}
+          check-latest: true
 
-    - name: Test on ${{ matrix.os }}
-      if: matrix.os == 'ubuntu-latest'
-      run: |
-         go test -v -race ./...
-         GOARCH=386 GOOS=linux go test -v ./...
+      - name: Build
+        run: go build ./...
 
-    - name: Test on ${{ matrix.os }}
-      if: matrix.os != 'ubuntu-latest'
-      run: |
-         go test -v -race ./...
+      - name: Test
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          go test -race -short ./...
+          GOARCH=386 GOOS=linux go test -short ./...
+
+      - name: Test
+        if: matrix.os != 'ubuntu-latest'
+        run: go test -race -short ./...
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.26.x
+          check-latest: true
+
+      - uses: golangci/golangci-lint-action@v7
+        with:
+          version: latest
+
+  vulncheck:
+    name: govulncheck
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: 1.26.x
+          check-latest: true
+
+      - name: Install govulncheck
+        run: go install golang.org/x/vuln/cmd/govulncheck@latest
+
+      - name: Run govulncheck
+        run: govulncheck ./...

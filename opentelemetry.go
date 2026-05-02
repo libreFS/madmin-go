@@ -24,7 +24,7 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/minio/madmin-go/v3/estream"
+	"github.com/libreFS/madmin-go/v3/estream"
 )
 
 //go:generate msgp $GOFILE

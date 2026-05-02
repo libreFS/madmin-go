@@ -23,7 +23,7 @@ package madmin_test
 import (
 	"testing"
 
-	"github.com/minio/madmin-go/v3"
+	"github.com/libreFS/madmin-go/v3"
 )
 
 func TestMinioAdminClient(t *testing.T) {
